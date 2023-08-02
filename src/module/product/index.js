@@ -1,13 +1,14 @@
 import Layout from "@/components/Layout";
 
-export default function ProductPage(){
+export default function ProductPage() {
   return (
     <>
-      <Layout title='Product Page'>
+      <Layout title="Product Page">
         <main>
           <p>Product Page</p>
+          <p>New Product</p>
         </main>
       </Layout>
     </>
-  )
+  );
 }
