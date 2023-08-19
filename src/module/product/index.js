@@ -5,8 +5,14 @@ export default function ProductPage() {
     <>
       <Layout title="Product Page">
         <main>
-          <p>Product Page</p>
-          <p>New Product</p>
+          <section
+            style={{
+              display:"flex",
+              justifyContent:"space-between",
+              alignItems:"center"
+            }}>
+              <Title order={}
+          </section>
         </main>
       </Layout>
     </>
