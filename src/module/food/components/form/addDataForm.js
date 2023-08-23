@@ -2,7 +2,7 @@ import { addFood } from "@/common/query/food";
 import { Button, Group, Modal, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
-import { notifications } from "@mantine/notifications";
+// import { notifications } from "@mantine/notifications";
 
 const handleValidateForm = (data, field) => {
   return data === "" || data === null ? `${field} must filled` : null;
@@ -61,10 +61,10 @@ export default function AddDataForm(props) {
             style={{ marginTop: "10px" }}
             placeholder="Pick one"
             data={[
-              { value: "jajanan", label: "Jajanan" },
+              { value: "menu utama", label: "Menu Utama" },
               { value: "minuman", label: "Minuman" },
-              { value: "roti", label: "Roti" },
-              { value: "kue", label: "Kue" },
+              { value: "snack", label: "Snack" },
+              { value: "buah", label: "Buah" },
             ]}
             {...form.getInputProps("category")}
           />

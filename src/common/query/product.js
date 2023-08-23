@@ -11,16 +11,16 @@ export async function getProduct(id) {
 }
 
 export async function addProduct(params) {
-  const data = await API.post(`/add-products`, params);
+  const data = await API.post(`/add-product`, params);
   return data;
 }
 
 export async function editProduct(id, params) {
-  const data = await API.put(`/edit-products?id=${id}`, params);
+  const data = await API.put(`/edit-product?id=${id}`, params);
   return data;
 }
 
 export async function deleteProduct(id) {
-  const data = await API.delete(`/delete-products?id=${id}`);
+  const data = await API.delete(`/delete-product?id=${id}`);
   return data;
 }

@@ -7,7 +7,7 @@ import { DataTable } from "mantine-datatable";
 import { useState } from "react";
 import AddDataForm from "./components/form/addDataForm";
 import EditDataForm from "./components/form/editDataForm";
-import { notifications } from "@mantine/notifications";
+// import { notifications } from "@mantine/notifications";
 
 export default function FoodPage() {
   const [page, setPage] = useState(1);
@@ -28,7 +28,7 @@ export default function FoodPage() {
     data: foods,
     refetch,
     isFetching,
-  } = useQuery(["list-foods", skip], () => getFoods(skip, "Santi"), {
+  } = useQuery(["list-foods", skip], () => getFoods(skip, "Indah"), {
     initialData: [],
   });
 
