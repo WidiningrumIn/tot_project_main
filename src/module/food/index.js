@@ -1,4 +1,4 @@
-import { deleteProduct, getProducts } from "@/common/query/product";
+import { deleteFood, getFoods } from "@/common/query/food";
 import Layout from "@/components/Layout";
 import { ActionIcon, Button, Group, Modal, Text, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
@@ -6,32 +6,33 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
 import { useState } from "react";
 import AddDataForm from "./components/form/addDataForm";
-import EditDataForm from "./components/form/editDataform";
-// import { notifications } from "@mantine/notifications";
+import EditDataForm from "./components/form/editDataForm";
+import { notifications } from "@mantine/notifications";
 
-export default function ProductPage() {
+export default function FoodPage() {
   const [page, setPage] = useState(1);
   const [skip, setSkip] = useState(0);
-  const [idProduct, setIdProduct] = useState(null);
+  const [idFood, setIdFood] = useState(null);
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [detailData, setDetailData] = useState({
     id: null,
-    title: "",
-    description: "",
+    name: "",
     category: "",
+    description: "",
+    createdBy: "",
   });
 
   const {
-    data: products,
+    data: foods,
     refetch,
     isFetching,
-  } = useQuery(["list-products", skip], () => getProducts(skip), {
+  } = useQuery(["list-foods", skip], () => getFoods(skip, "Santi"), {
     initialData: [],
   });
 
-  const { mutate, isLoading: isLoadingDelete } = useMutation(deleteProduct, {
+  const { mutate, isLoading: isLoadingDelete } = useMutation(deleteFood, {
     onSuccess: (response) => {
       if (response.status === 200) {
         setIsOpenDelete(false);
@@ -59,14 +60,15 @@ export default function ProductPage() {
 
   const onHandleDeleteData = (isOpen, id) => {
     setIsOpenDelete(isOpen);
-    setIdProduct(id);
+    setIdFood(id);
   };
 
   const onHandleEditData = (isOpen, data) => {
     const editData = {
-      title: data.title,
-      description: data.description,
+      name: data.name,
       category: data.category,
+      description: data.description,
+      createdBy: data.createdBy,
       id: data.id,
     };
     setDetailData(editData);
@@ -75,7 +77,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <Layout title="Product Page">
+      <Layout title="Food Page">
         <main>
           <section
             style={{
@@ -85,9 +87,9 @@ export default function ProductPage() {
             }}
           >
             <Title order={1} style={{ marginBottom: "10px" }}>
-              List Product
+              List Food
             </Title>
-            <Button onClick={() => setIsOpenAdd(true)}>Add Product</Button>
+            <Button onClick={() => setIsOpenAdd(true)}>Add Food</Button>
           </section>
           <section>
             <DataTable
@@ -95,8 +97,8 @@ export default function ProductPage() {
               minHeight={180}
               columns={[
                 {
-                  accessor: "title",
-                  title: "Title",
+                  accessor: "name",
+                  title: "Name",
                   width: 160,
                 },
                 {
@@ -107,6 +109,11 @@ export default function ProductPage() {
                 {
                   accessor: "description",
                   title: "Description",
+                  width: 160,
+                },
+                {
+                  accessor: "createdBy",
+                  title: "Created By",
                   width: 160,
                 },
                 {
@@ -126,9 +133,9 @@ export default function ProductPage() {
                   ),
                 },
               ]}
-              records={products.data?.products}
+              records={foods.data?.foods}
               fetching={isFetching}
-              totalRecords={products.data?.totalData}
+              totalRecords={foods.data?.totalData}
               recordsPerPage={10}
               page={page}
               onPageChange={(p) => onHandleChangePage(p)}
@@ -141,7 +148,7 @@ export default function ProductPage() {
           </Text>
 
           <Group align="flex-end">
-            <Button color="red" onClick={() => mutate(idProduct)} loading={isLoadingDelete}>
+            <Button color="red" onClick={() => mutate(idFood)} loading={isLoadingDelete}>
               Hapus
             </Button>
           </Group>
