@@ -6,8 +6,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
 import { useState } from "react";
 import AddDataForm from "./components/form/addDataForm";
-import EditDataForm from "./components/form/editDataform";
-// import { notifications } from "@mantine/notifications";
+import EditDataForm from "./components/form/editDataForm";
+import { notifications } from "@mantine/notifications";
 
 export default function ProductPage() {
   const [page, setPage] = useState(1);

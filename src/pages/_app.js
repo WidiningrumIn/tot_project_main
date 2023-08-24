@@ -1,22 +1,17 @@
-import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
-import {
-  Hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-
+import Head from "next/head";
+import { MantineProvider } from "@mantine/core";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Notifications } from "@mantine/notifications";
 const QueryClients = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       retry: 1,
       cacheTime: 60 * 1000, // 60seconds
-      staleTime: 0 * 10 * 1000 // 0seconds
-    }
-  }
+      staleTime: 0 * 10 * 1000, // 0seconds
+    },
+  },
 });
-
 
 export default function App(props) {
   const { Component, pageProps } = props;
@@ -33,9 +28,10 @@ export default function App(props) {
         withNormalizeCSS
         theme={{
           /** Put your mantine theme override here */
-          colorScheme: 'light',
+          colorScheme: "light",
         }}
       >
+        <Notifications />
         <QueryClientProvider client={QueryClients}>
           <Hydrate state={pageProps.dehydratedState}>
             <Component {...pageProps} />

@@ -2,7 +2,7 @@ import { addProduct } from "@/common/query/product";
 import { Button, Group, Modal, Select, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
-// import { notifications } from "@mantine/notifications";
+import { notifications } from "@mantine/notifications";
 
 const handleValidateForm = (data, field) => {
   return data === "" || data === null ? `${field} must filled` : null;
